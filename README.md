@@ -1,3 +1,11 @@
+Docker Commands :
+
+docker build -f Dockerfile -t ergastapi . 
+
+docker run -p 8892:8890 ergastapi 
+
+
+
 
 Task 
 
