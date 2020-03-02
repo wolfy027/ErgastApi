@@ -1,36 +1,7 @@
 package api.ergast.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-
-import api.ergast.model.Constructor;
-import api.ergast.model.Driver;
-import api.ergast.model.ErgastResponse;
-import api.ergast.model.PitStop;
-import api.ergast.model.Race;
-import api.ergast.model.reponse.PitStopStanding;
-import api.ergast.model.request.PitStopRequest;
-import api.ergast.utils.ErgastUtils;
 
 @RestController
 @RequestMapping("/")

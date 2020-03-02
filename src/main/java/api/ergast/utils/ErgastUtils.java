@@ -6,7 +6,6 @@ public class ErgastUtils {
 
 	public static String getDriverStandingUrlByYear(String serviceURL, int year) {
 		String url = serviceURL + "/api/f1/" + year + "/driverStandings.json";
-		System.out.println(url);
 		return url;
 	}
 
