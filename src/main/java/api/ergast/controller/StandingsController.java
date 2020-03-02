@@ -19,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 import api.ergast.model.DriverStanding;
 import api.ergast.model.ErgastResponse;
-import api.ergast.model.NationalityWiseStanding;
+import api.ergast.model.reponse.NationalityWiseStanding;
 import api.ergast.utils.ErgastUtils;
 
 @RestController

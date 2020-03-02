@@ -1,8 +1,11 @@
 package api.ergast.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Driver {
 
-	private String driveId;
+	private String driverId;
 	private String permanentNumber;
 	private String code;
 	private String givenName;
@@ -15,12 +18,12 @@ public class Driver {
 
 	}
 
-	public String getDriveId() {
-		return driveId;
+	public String getDriverId() {
+		return driverId;
 	}
 
-	public void setDriveId(String driveId) {
-		this.driveId = driveId;
+	public void setDriverId(String driverId) {
+		this.driverId = driverId;
 	}
 
 	public String getPermanentNumber() {

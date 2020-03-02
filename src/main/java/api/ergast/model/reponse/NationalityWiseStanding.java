@@ -1,4 +1,4 @@
-package api.ergast.model;
+package api.ergast.model.reponse;
 
 public class NationalityWiseStanding implements Comparable<NationalityWiseStanding> {
 

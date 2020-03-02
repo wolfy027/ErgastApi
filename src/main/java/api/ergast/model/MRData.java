@@ -12,8 +12,18 @@ public class MRData {
 	private String limit;
 	private String offset;
 	private String total;
+
 	@JsonProperty("StandingsTable")
-	private StandingsTable StandingsTable;
+	private StandingsTable standingsTable;
+
+	@JsonProperty("RaceTable")
+	private RaceTable raceTable;
+
+	@JsonProperty("ConstructorTable")
+	private ConstructorTable constructorTable;
+
+	@JsonProperty("DriverTable")
+	private DriverTable driverTable;
 
 	public MRData() {
 
@@ -68,11 +78,35 @@ public class MRData {
 	}
 
 	public StandingsTable getStandingsTable() {
-		return StandingsTable;
+		return standingsTable;
 	}
 
 	public void setStandingsTable(StandingsTable standingsTable) {
-		StandingsTable = standingsTable;
+		this.standingsTable = standingsTable;
+	}
+
+	public RaceTable getRaceTable() {
+		return raceTable;
+	}
+
+	public void setRaceTable(RaceTable raceTable) {
+		this.raceTable = raceTable;
+	}
+
+	public ConstructorTable getConstructorTable() {
+		return constructorTable;
+	}
+
+	public void setConstructorTable(ConstructorTable constructorTable) {
+		this.constructorTable = constructorTable;
+	}
+
+	public DriverTable getDriverTable() {
+		return driverTable;
+	}
+
+	public void setDriverTable(DriverTable driverTable) {
+		this.driverTable = driverTable;
 	}
 
 }
