@@ -5,11 +5,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import api.ergast.controller.service.threads.DriverStandingsFetcherThread;
 import api.ergast.model.Constructor;
 import api.ergast.model.Driver;
 import api.ergast.model.ErgastResponse;
@@ -38,6 +44,39 @@ public class PitStopDataService {
 				driverConstructorMap.put(driver.getDriverId(), constructor.getConstructorId());
 			}
 			System.out.println(System.currentTimeMillis() - time);
+		}
+		return driverConstructorMap;
+	}
+	
+	public HashMap<String, String> getConstructorDriverMap2(RestTemplate restTemplate, int year) {
+		String constructorApiUrl = ErgastUtils.getConstructorsUrlByYear(serviceURL, year);
+		ErgastResponse constructorsResponse = restTemplate.getForObject(constructorApiUrl, ErgastResponse.class);
+
+		HashMap<String, String> driverConstructorMap = new HashMap<>();
+		List<ErgastResponse> responseArray = new Vector<ErgastResponse>();
+		ExecutorService service = Executors.newCachedThreadPool();
+		List<Future<Runnable>> futures = new ArrayList<Future<Runnable>>();
+		for (Constructor constructor : constructorsResponse.getMRData().getConstructorTable().getConstructors()) {
+			String driverApiUrl = ErgastUtils.getDriversUrlByConstructor(serviceURL, year,
+					constructor.getConstructorId());
+			Runnable r = new DriverStandingsFetcherThread(restTemplate, driverApiUrl, responseArray);
+			Future<Runnable> f = (Future<Runnable>) service.submit(r);
+			futures.add(f);
+		}
+		for (Future<Runnable> f : futures) {
+			try {
+				f.get();
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
+			}
+		}
+		service.shutdownNow();
+		System.out.println(responseArray.size());
+		for (ErgastResponse driversResponse : responseArray) {
+			for (Driver driver : driversResponse.getMRData().getDriverTable().getDrivers()) {
+				driverConstructorMap.put(driver.getDriverId(),
+						driversResponse.getMRData().getDriverTable().getConstructorId());
+			}
 		}
 		return driverConstructorMap;
 	}

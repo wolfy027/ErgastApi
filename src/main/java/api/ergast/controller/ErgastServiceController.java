@@ -78,12 +78,9 @@ public class ErgastServiceController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		int threshold = request.getThreshold();
-		//long time = System.currentTimeMillis();
 		HashMap<String, String> driverConstructorMap = pitStopDataService.getConstructorDriverMap(restTemplate, year);
-		//System.out.println(System.currentTimeMillis() - time);  //--
 		List<PitStopStanding> pitStopFilteredList = pitStopDataService.getPitStopDataByConstructor(restTemplate, year,
 				threshold, driverConstructorMap);
-		//System.out.println(System.currentTimeMillis() - time);  //--
 		if (pitStopFilteredList.size() == 0) {
 			return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 		}
