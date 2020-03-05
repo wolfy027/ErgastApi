@@ -1,4 +1,13 @@
-FROM openjdk:8
-ADD target/ergastapi-spring-boot.jar ergastapi-spring-boot.jar
+FROM openjdk:8-jdk-alpine
+WORKDIR /workspace/app
+COPY pom.xml .
+COPY mvnw .  
+COPY .mvn .mvn
+RUN ./mvnw dependency:go-offline -B 
+COPY src ./src  
+RUN ./mvnw package -DskipTests
+
+FROM openjdk:8-jre-alpine
+ADD target ./target
 EXPOSE 8890
-ENTRYPOINT ["java","-jar", "ergastapi-spring-boot.jar"]
+ENTRYPOINT ["java","-jar", "./target/ergastapi-spring-boot.jar"]
