@@ -8,7 +8,8 @@ GET http://$host:$port/victories?start=2010&end=2015&type=$type
 </code>
 
 - Response
-<code>[
+```json
+[
   {
     "nationality": "British",
     "wins": 81,
@@ -18,9 +19,9 @@ GET http://$host:$port/victories?start=2010&end=2015&type=$type
     "nationality": "German",
     "wins": 71,
     "rank": 2
-  }...
+  }
  ]
-</code>
+```
 
 ### 2. The average time of pitstops by constructors in a determined year considering a threshold
 <code>POST http://$host:$port/pitstops?type=$type</code><br>
@@ -33,7 +34,7 @@ GET http://$host:$port/victories?start=2010&end=2015&type=$type
 </code>
 
 - Response
-<code>
+```json
   [
   {
     "rank": 1,
@@ -49,7 +50,7 @@ GET http://$host:$port/victories?start=2010&end=2015&type=$type
     "fastestPitStopTime": 19.857,
     "slowestPitStopTime": 38.468
   }
-</code>
+```
 
 # Definition
 - $host  : ip address/ localhost of machine
