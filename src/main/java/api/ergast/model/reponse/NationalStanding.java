@@ -1,6 +1,6 @@
 package api.ergast.model.reponse;
 
-public class NationalityWiseStanding implements Comparable<NationalityWiseStanding> {
+public class NationalStanding implements Comparable<NationalStanding> {
 
 	private String nationality;
 	private int wins;
@@ -43,14 +43,14 @@ public class NationalityWiseStanding implements Comparable<NationalityWiseStandi
 		return rank + (",") + nationality + (",") + wins;
 	}
 
-	public NationalityWiseStanding(String nationality, int wins) {
+	public NationalStanding(String nationality, int wins) {
 		super();
 		this.nationality = nationality;
 		this.wins = wins;
 	}
 
 	@Override
-	public int compareTo(NationalityWiseStanding o) {
+	public int compareTo(NationalStanding o) {
 		int i = o.getWins() - this.getWins();
 		if (i != 0)
 			return i;

@@ -95,7 +95,8 @@ public class PitStopStanding implements Comparable<PitStopStanding> {
 
 	@Override
 	public String toString() {
-		return constructorName + (",") + averagePitStopTime + (",") + fastestPitStopTime + (",") + slowestPitStopTime;
+		return rank + (",") + constructorName + (",") + averagePitStopTime + (",") + fastestPitStopTime + (",")
+				+ slowestPitStopTime;
 	}
 
 }

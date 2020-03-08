@@ -25,9 +25,10 @@ import org.springframework.web.client.RestTemplate;
 
 import api.ergast.controller.service.PitStopDataService;
 import api.ergast.controller.service.VictoryDataService;
-import api.ergast.model.reponse.NationalityWiseStanding;
+import api.ergast.model.reponse.NationalStanding;
 import api.ergast.model.reponse.PitStopStanding;
 import api.ergast.model.request.PitStopRequest;
+import api.ergast.utils.Constants;
 import api.ergast.utils.CsvUtils;
 
 @RestController
@@ -53,16 +54,16 @@ public class ErgastServiceController {
 	String serviceURL;
 
 	@RequestMapping(value = "victories", method = RequestMethod.GET)
-	public ResponseEntity<NationalityWiseStanding[]> top10Victories(@RequestParam("start") int startYear,
+	public ResponseEntity<NationalStanding[]> top10Victories(@RequestParam("start") int startYear,
 			@RequestParam("end") int endYear, @RequestParam("type") String outputType, HttpServletResponse response) {
 		if (startYear > endYear) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		NationalityWiseStanding[] resultArray = victoryDataService.getVictoryData(restTemplate, startYear, endYear);
+		NationalStanding[] resultArray = victoryDataService.getVictoryData(restTemplate, startYear, endYear);
 
 		if (outputType.equalsIgnoreCase("csv")) {
-			CsvUtils.writeCsvResponse(new String[] { "rank", "nationality", "wins" }, "victoriesByNationality.csv",
-					response, Arrays.asList(resultArray));
+			CsvUtils.writeCsvResponse(Constants.VICTORY_DATA_HEADERS, "victoriesByNationality.csv", response,
+					Arrays.asList(resultArray));
 		} else if (outputType.equalsIgnoreCase("json")) {
 			return new ResponseEntity<>(resultArray, HttpStatus.OK);
 		}
@@ -78,15 +79,17 @@ public class ErgastServiceController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		int threshold = request.getThreshold();
-		HashMap<String, String> driverConstructorMap = pitStopDataService.getConstructorDriverMap(restTemplate, year);
+		HashMap<String, List<String>> driverConstructorMap = pitStopDataService.getConstructorDriverMap(restTemplate,
+				year);
+		System.out.println(driverConstructorMap);
 		List<PitStopStanding> pitStopFilteredList = pitStopDataService.getPitStopDataByConstructor(restTemplate, year,
 				threshold, driverConstructorMap);
 		if (pitStopFilteredList.size() == 0) {
 			return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 		}
 		if (outputType.equalsIgnoreCase("csv")) {
-			CsvUtils.writeCsvResponse(new String[] { "constructorName", "averagePitStopTime", "fastestPitStopTime",
-					"slowestPitStopTime" }, "pitStopDurationByConstructor.csv", response, pitStopFilteredList);
+			CsvUtils.writeCsvResponse(Constants.PITSTOPS_DATA_HEADERS, "pitStopDurationByConstructor.csv", response,
+					pitStopFilteredList);
 		} else if (outputType.equalsIgnoreCase("json")) {
 			return new ResponseEntity<>(pitStopFilteredList, HttpStatus.OK);
 		}

@@ -19,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import api.ergast.application.ErgastApiApplication;
 import api.ergast.controller.ErgastServiceController;
 import api.ergast.controller.service.VictoryDataService;
-import api.ergast.model.reponse.NationalityWiseStanding;
+import api.ergast.model.reponse.NationalStanding;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(ErgastServiceController.class)
@@ -37,11 +37,11 @@ public class VictoryDataControllerTest {
 
 	@Test
 	public void givenMockingIsDoneByMockito_whenGetIsCalled_shouldReturnMockedCsvObject() throws Exception {
-		NationalityWiseStanding standing1 = new NationalityWiseStanding("British", 25);
+		NationalStanding standing1 = new NationalStanding("British", 25);
 		standing1.setRank(2);
-		NationalityWiseStanding standing2 = new NationalityWiseStanding("Polish", 50);
+		NationalStanding standing2 = new NationalStanding("Polish", 50);
 		standing2.setRank(1);
-		NationalityWiseStanding[] standings = new NationalityWiseStanding[] { standing2, standing1 };
+		NationalStanding[] standings = new NationalStanding[] { standing2, standing1 };
 		Mockito.when(victoryDataService.getVictoryData(restTemplate, 2010, 2011)).thenReturn(standings);
 
 		mvc.perform(get("/victories").queryParam("start", "2010").queryParam("end", "2011").queryParam("type", "csv"))
@@ -50,11 +50,11 @@ public class VictoryDataControllerTest {
 
 	@Test
 	public void givenMockingIsDoneByMockito_whenGetIsCalled_shouldReturnMockedJsonObject() throws Exception {
-		NationalityWiseStanding standing1 = new NationalityWiseStanding("British", 25);
+		NationalStanding standing1 = new NationalStanding("British", 25);
 		standing1.setRank(2);
-		NationalityWiseStanding standing2 = new NationalityWiseStanding("Polish", 50);
+		NationalStanding standing2 = new NationalStanding("Polish", 50);
 		standing2.setRank(1);
-		NationalityWiseStanding[] standings = new NationalityWiseStanding[] { standing2, standing1 };
+		NationalStanding[] standings = new NationalStanding[] { standing2, standing1 };
 		Mockito.when(victoryDataService.getVictoryData(restTemplate, 2010, 2011)).thenReturn(standings);
 
 		mvc.perform(get("/victories").queryParam("start", "2010").queryParam("end", "2011").queryParam("type", "json"))
