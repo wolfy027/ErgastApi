@@ -10,7 +10,7 @@ GET http://$host:$port/victories?start=2010&end=2015&type=$type
 
 ### 2. The average time of pitstops by constructors in a determined year considering a threshold
 <code>POST http://$host:$port/pitstops?type=$type</code><br>
-<code>Content-Type: application/json</code><br>
+<code>Content-Type: application/json</code><br><br>
 <code>
 {
     "year":2019,
