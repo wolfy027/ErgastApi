@@ -54,8 +54,8 @@ public class PitStopsDataControllerTest {
 		List<PitStopStanding> pitStopFilteredList = new ArrayList<PitStopStanding>();
 		pitStopFilteredList.add(pitStopStanding1);
 		pitStopFilteredList.add(pitStopStanding2);
-		Mockito.when(pitStopDataService.getPitStopDataByConstructor(restTemplate, 2010, 25, new HashMap()))
-				.thenReturn(pitStopFilteredList);
+		Mockito.when(pitStopDataService.getPitStopDataByConstructor(restTemplate, 2010, 25,
+				new HashMap<String, List<String>>())).thenReturn(pitStopFilteredList);
 
 		mvc.perform(post("/pitstops").contentType(MediaType.APPLICATION_JSON).queryParam("type", "csv")
 				.content("{\n" + "    \"year\":2010,\n" + "    \"threshold\":25\n" + "}")).andExpect(status().isOk())
@@ -77,8 +77,8 @@ public class PitStopsDataControllerTest {
 		List<PitStopStanding> pitStopFilteredList = new ArrayList<PitStopStanding>();
 		pitStopFilteredList.add(pitStopStanding1);
 		pitStopFilteredList.add(pitStopStanding2);
-		Mockito.when(pitStopDataService.getPitStopDataByConstructor(restTemplate, 2010, 25, new HashMap()))
-				.thenReturn(pitStopFilteredList);
+		Mockito.when(pitStopDataService.getPitStopDataByConstructor(restTemplate, 2010, 25,
+				new HashMap<String, List<String>>())).thenReturn(pitStopFilteredList);
 
 		mvc.perform(post("/pitstops").contentType(MediaType.APPLICATION_JSON).queryParam("type", "json")
 				.content("{\n" + "    \"year\":2010,\n" + "    \"threshold\":25\n" + "}")).andExpect(status().isOk())

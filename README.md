@@ -1,12 +1,26 @@
 # ErgastApi Wrapper
   This project is an Ergast API Wrapper made using Spring Boot providing the following 
-  data () :-
+  data :-
 
 ### 1. The top 10 most victorious grand-prixs by Nationalities over a range of years
 <code>
 GET http://$host:$port/victories?start=2010&end=2015&type=$type
 </code>
 
+- Response
+<code>[
+  {
+    "nationality": "British",
+    "wins": 81,
+    "rank": 1
+  },
+  {
+    "nationality": "German",
+    "wins": 71,
+    "rank": 2
+  }...
+ ]
+</code>
 
 ### 2. The average time of pitstops by constructors in a determined year considering a threshold
 <code>POST http://$host:$port/pitstops?type=$type</code><br>
@@ -16,6 +30,25 @@ GET http://$host:$port/victories?start=2010&end=2015&type=$type
     "year":2019,
     "threshold":30
 }
+</code>
+
+- Response
+<code>
+  [
+  {
+    "rank": 1,
+    "constructorName": "mercedes",
+    "averagePitStopTime": 24.148465517241373,
+    "fastestPitStopTime": 19.993,
+    "slowestPitStopTime": 33.328
+  },
+  {
+    "rank": 2,
+    "constructorName": "ferrari",
+    "averagePitStopTime": 24.822145161290315,
+    "fastestPitStopTime": 19.857,
+    "slowestPitStopTime": 38.468
+  }
 </code>
 
 # Definition
