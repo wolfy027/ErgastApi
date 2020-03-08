@@ -1,13 +1,13 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:8-jdk-alpine as builder
 WORKDIR /workspace/app
 COPY pom.xml .
 COPY mvnw .  
-COPY .mvn .mvn
-#RUN ./mvnw dependency:go-offline -B 
+COPY .mvn .mvn 
 COPY src ./src  
-RUN ./mvnw clean package -DskipTests
+RUN ./mvnw package -DskipTests
 
 FROM openjdk:8-jre-alpine
-ADD target ./target
+WORKDIR /app
+COPY --from=builder /workspace/app/target .
 EXPOSE 8890
-ENTRYPOINT ["java","-jar", "./target/ergastapi-spring-boot.jar"]
+ENTRYPOINT ["java","-jar", "./ergastapi-spring-boot.jar"]

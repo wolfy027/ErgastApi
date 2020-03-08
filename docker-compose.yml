@@ -9,5 +9,5 @@ services:
       context: . # Use an image built from the specified dockerfile in the current directory.
       dockerfile: Dockerfile
     ports:
-      - "8892:8890" # Forward the exposed port 8890 on the container to port 8892 on the host machine
+      - "9000:8890" # Forward the exposed port 8890 on the container to port 9000 on the host machine
     restart: always
