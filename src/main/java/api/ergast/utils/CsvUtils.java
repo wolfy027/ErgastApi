@@ -9,7 +9,7 @@ import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
-public class CsvUtils {
+public abstract class CsvUtils {
 
 	public static void writeCsvResponse(String[] header, String csvFileName, HttpServletResponse response,
 			List<?> objects) {

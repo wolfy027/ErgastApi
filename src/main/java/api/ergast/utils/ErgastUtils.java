@@ -2,11 +2,10 @@ package api.ergast.utils;
 
 import java.util.Collection;
 
-public class ErgastUtils {
+public abstract class ErgastUtils {
 
 	public static String getDriverStandingUrlByYear(String serviceURL, int year) {
-		String url = serviceURL + "/api/f1/" + year + "/driverStandings.json";
-		return url;
+		return serviceURL + "/api/f1/" + year + "/driverStandings.json";
 	}
 
 	public static String getSeasonsUrlByYear(String serviceURL, int year) {
